@@ -51,7 +51,7 @@ if get_option('lib')
     meson.project_name(),
     sources,
     dependencies: deps,
-    vala_header: meson.project_name() + '.h',
+    vala_header: meson.project_name().replace('astal-', '') + '.h',
     vala_vapi: meson.project_name() + '-' + api_version + '.vapi',
     vala_gir: gir,
     vala_args: ['--pkg', 'DbusmenuGtk3-0.4', '--pkg', 'Dbusmenu-0.4'],
@@ -59,7 +59,7 @@ if get_option('lib')
     c_args: dbusmenu_cflags.split(' '),
     link_args: dbusmenu_libs.split(' '),
     install: true,
-    install_dir: [true, true, true, true],
+    install_dir: [true, get_option('includedir') / 'astal', true, true],
   )
 
   import('pkgconfig').generate(
